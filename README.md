@@ -1,12 +1,14 @@
 ### elcome to **BeatBuzz**
 
-Team:
+Team info:
 
 -   Dhrumit Panchal(Team Leader)
 -   Riya Panchal
 -   Sparsh Lohana
 -   Varshil J. Patel
 
+<br />
+<hr />
 <br />
 
 > If you have turbo install in your system then run command dirctly without `npx` otherwise use `npx` to execute turbo commands.
@@ -40,6 +42,8 @@ For getting build of all workspaces run below command
 npx turbo run build
 ```
 
+<br />
+<hr />
 <br />
 
 > Note: This section of instructions is only for developer.
