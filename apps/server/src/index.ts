@@ -3,7 +3,6 @@ import app from "./app";
 import WebSocket from "ws";
 import dotenv from "dotenv"
 import mongoose from "mongoose";
-import { log } from "console";
 dotenv.config();
 
 const server: Server = createServer(app);
