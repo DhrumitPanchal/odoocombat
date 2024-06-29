@@ -7,7 +7,7 @@ const Watcher: React.FC = () => {
   const socketRef = useRef<WebSocket | null>(null);
 
   useEffect(() => {
-    socketRef.current = new WebSocket('ws://localhost:3000');
+    socketRef.current = new WebSocket('ws://localhost:8080');
     
     socketRef.current.onopen = () => {
       socketRef.current?.send(JSON.stringify({ type: 'watcher' }));
