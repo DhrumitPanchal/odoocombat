@@ -32,7 +32,7 @@ const Streamer: React.FC = () => {
             console.log('Connected');
           });
 
-          peerRef.current.on('data', (data) => {
+          peerRef.current.on('data', (data : any) => {
             console.log(data);
           });
         });
