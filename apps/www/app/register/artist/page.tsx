@@ -13,7 +13,7 @@ interface DecodedToken {
 const RegisterArtist = () => {
 	const router = useRouter();
 	const handleSuccess = async (credentialResponse: CredentialResponse) => {
-		const token = credentialResponse.credential;
+		const token = credentialResponse.credential as string;
 
 		// Decode the token using jsonwebtoken
 		const decoded = jwt.decode(token) as DecodedToken;
@@ -41,6 +41,7 @@ const RegisterArtist = () => {
 
 			if (response.ok) {
 				console.log('Credential saved');
+				localStorage.setItem('token', token);
 				router.push('/');
 			} else {
 				console.error('Failed to save credential');
