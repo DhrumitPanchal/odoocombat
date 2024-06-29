@@ -1,10 +1,15 @@
-import express from "express";
-import  authRouter  from "./routes/authRoute";
+import express, { Request, Response } from "express";
+import authRouter from "./routes/authRoute";
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/api",authRouter)
-app.get("/" , (req,res) => {
-    res.send("Server is running...")
-})
+app.use("/api", authRouter);
+
+app.get("/health", (req: Request, res: Response) => {
+	res.status(200).json({
+		message: "Health check done.",
+	});
+});
+
 export default app;

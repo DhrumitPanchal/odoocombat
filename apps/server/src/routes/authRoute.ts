@@ -1,8 +1,7 @@
 import express from "express";
+import { registerController } from "../controllers/authController";
 
- const router = express.Router();
+const router = express.Router();
 
- router.get("/login", (req, res) => {
-  res.json({ message: "Welcome to the OdooCombat API!" });
-});
-export default router
+router.get("/register", registerController);
+export default router;

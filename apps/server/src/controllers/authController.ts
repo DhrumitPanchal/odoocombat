@@ -1,5 +1,8 @@
+import { Request, Response } from "express";
 import User from "../models/auth";
 
-async function Login(req:any,res:any) {
-    
+export async function registerController(req: Request, res: Response) {
+  return res.json({
+    message: "login"
+  })
 }
