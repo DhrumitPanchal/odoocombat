@@ -1,3 +1,4 @@
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -17,7 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn("dark w-full h-screen", inter.className)}>{children}</body>
+      <body className={cn("dark w-full h-screen", inter.className)}>
+        <GoogleOAuthProvider clientId="252350409319-8k8t2r797e3pb4r005gdak1d6kmajgh7.apps.googleusercontent.com">
+          {children}
+        </GoogleOAuthProvider>
+      </body>
     </html>
   );
 }
