@@ -1,10 +1,19 @@
+"use client";
+
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { IoIosArrowForward } from "react-icons/io";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import { CarouselDemo } from "@/components/Carousel";
+import { useRouter } from "next/navigation";
 export default function Home() {
+  const router = useRouter();
+
+  const handleRedirect = () => { 
+    router.push('/stream')
+  };
+
   return (
     <>
       <section className="flex flex-col items-center h-fit w-full pb-[4rem]">
@@ -21,7 +30,9 @@ export default function Home() {
         <div className="mt-[1rem] w-full px-[2rem]">
           <h2 className="text-3xl font-semibold">Live</h2>
           <div className="flex gap-[1.6rem] w-full mt-[1rem] ">
-            <div className="cursor-pointer flex flex-col gap-[.3rem]">
+            <div className="cursor-pointer flex flex-col gap-[.3rem]" onClick={() => {
+              handleRedirect()
+            }}>
               <img
                 src="https://i.pinimg.com/474x/9c/1f/68/9c1f68a3ea6762531e68f8f2c61abfc1.jpg"
                 alt=""
@@ -33,7 +44,9 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="cursor-pointer flex flex-col gap-[.4rem]">
+            <div className="cursor-pointer flex flex-col gap-[.4rem]" onClick={() => {
+              handleRedirect()
+            }}>
               <img
                 src="https://i.pinimg.com/474x/66/d1/48/66d148ad425877f8596482266e63098a.jpg"
                 alt=""
@@ -45,7 +58,9 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="cursor-pointer flex flex-col gap-[.4rem]">
+            <div className="cursor-pointer flex flex-col gap-[.4rem]" onClick={() => {
+              handleRedirect()
+            }}>
               <img
                 src="https://i.pinimg.com/564x/7f/ec/45/7fec45ada5d1f29ab81515d046e55fd8.jpg"
                 alt=""
@@ -57,7 +72,9 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="cursor-pointer flex flex-col gap-[.4rem]">
+            <div className="cursor-pointer flex flex-col gap-[.4rem]" onClick={() => {
+              handleRedirect()
+            }}>
               <img
                 src="https://i.pinimg.com/474x/47/bf/33/47bf33e1d40c6d129af356e5dff46693.jpg"
                 alt=""
@@ -69,7 +86,9 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="cursor-pointer flex flex-col gap-[.4rem]">
+            <div className="cursor-pointer flex flex-col gap-[.4rem]" onClick={() => {
+              handleRedirect()
+            }}>
               <img
                 src="https://i.pinimg.com/474x/ac/ad/89/acad8900159c74d709d59783e6f0168b.jpg"
                 alt=""
@@ -81,7 +100,9 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="cursor-pointer flex flex-col gap-[.4rem]">
+            <div className="cursor-pointer flex flex-col gap-[.4rem]" onClick={() => {
+              handleRedirect()
+            }}>
               <img
                 src="https://i.pinimg.com/474x/7c/4f/03/7c4f03b63a546d46f04fe64c9e10f55f.jpg"
                 alt=""
@@ -115,7 +136,9 @@ export default function Home() {
               </div>
 
               <div className="flex gap-[1.6rem] w-full mt-[1rem] ">
-                <div className="cursor-pointer flex flex-col gap-[.4rem]">
+                <div className="cursor-pointer flex flex-col gap-[.4rem]" onClick={() => {
+                  handleRedirect()
+                }}>
                   <img
                     src="https://i.pinimg.com/736x/51/26/44/5126446d8490c170ddf22a333bbf1901.jpg"
                     alt=""
@@ -128,7 +151,9 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="cursor-pointer flex flex-col gap-[.4rem]">
+                <div className="cursor-pointer flex flex-col gap-[.4rem]" onClick={() => {
+                  handleRedirect()
+                }}>
                   <img
                     src="https://i.pinimg.com/736x/89/b0/f4/89b0f4407bdce9ba7f34773e5d2c210c.jpg"
                     alt=""
@@ -141,7 +166,9 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="cursor-pointer flex flex-col gap-[.4rem]">
+                <div className="cursor-pointer flex flex-col gap-[.4rem]" onClick={() => {
+                  handleRedirect()
+                }}>
                   <img
                     src="https://i.pinimg.com/474x/3f/72/76/3f7276e73e7e7e7195a0e6cb7847d793.jpg"
                     alt=""
@@ -154,7 +181,9 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="cursor-pointer flex flex-col gap-[.4rem]">
+                <div className="cursor-pointer flex flex-col gap-[.4rem]" onClick={() => {
+                  handleRedirect()
+                }}>
                   <img
                     src="https://i.pinimg.com/474x/eb/22/31/eb2231c128769f14d998fdde01b33182.jpg"
                     alt=""
@@ -178,7 +207,7 @@ export default function Home() {
               </div>
 
               <div className="flex gap-[2rem] w-full mt-[1rem] ">
-                <div className="flex  gap-[1.4rem] w-full">
+                <div className="flex  gap-[1.4rem] w-full" >
                   <img
                     src="https://i.pinimg.com/474x/d1/ef/db/d1efdba923702381cf8229aae885c579.jpg"
                     alt=""
