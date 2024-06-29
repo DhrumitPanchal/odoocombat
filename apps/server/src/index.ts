@@ -18,39 +18,41 @@ connectToDB(DB_URL);
 let broadcaster: Socket | null = null;
 
 io.on("connection", (socket: Socket) => {
-    socket.on("broadcaster", () => {
-        broadcaster = socket;
-    });
+	console.log("Connected", socket.id);
 
-    socket.on("watcher", () => {
-        if (broadcaster) {
-            socket.emit("watcher");
-        }
-    });
+	socket.on("broadcaster", () => {
+		broadcaster = socket;
+	});
 
-    socket.on("offer", (offer: any) => {
-        if (broadcaster) {
-            broadcaster.emit("offer", offer);
-        }
-    });
+	socket.on("watcher", () => {
+		if (broadcaster) {
+			socket.emit("watcher");
+		}
+	});
 
-    socket.on("answer", (answer: any) => {
-        if (broadcaster) {
-            broadcaster.emit("answer", answer);
-        }
-    });
+	socket.on("offer", (offer: any) => {
+		if (broadcaster) {
+			broadcaster.emit("offer", offer);
+		}
+	});
 
-    socket.on("candidate", (candidate: any) => {
-        if (broadcaster) {
-            broadcaster.emit("candidate", candidate);
-        }
-    });
+	socket.on("answer", (answer: any) => {
+		if (broadcaster) {
+			broadcaster.emit("answer", answer);
+		}
+	});
 
-    socket.on("disconnect", () => {
-        if (socket === broadcaster) {
-            broadcaster = null;
-        }
-    });
+	socket.on("candidate", (candidate: any) => {
+		if (broadcaster) {
+			broadcaster.emit("candidate", candidate);
+		}
+	});
+
+	socket.on("disconnect", () => {
+		if (socket === broadcaster) {
+			broadcaster = null;
+		}
+	});
 });
 
 const port: number | string = process.env.PORT || 3000;
