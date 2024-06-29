@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
     token: {
@@ -20,10 +20,10 @@ const UserSchema = new mongoose.Schema({
     role: {
         type: String,
         // required: true,
-        default: '',
+        default: "",
     },
 });
 
-const User = mongoose.models.User || mongoose.model('User', UserSchema);
+const User = mongoose.models.User || mongoose.model("User", UserSchema);
 
 export default User;
