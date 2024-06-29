@@ -1,4 +1,4 @@
-### elcome to **BeatBuzz**
+### Welcome to **BeatBuzz**
 
 Team info:
 
