@@ -4,10 +4,10 @@ import User from "@/models/Users";
 
 export async function POST(req: NextRequest) {
     await connectToDatabase();
-    const { token, userId } = await req.json();
+    const { token, userId, username, email, photo } = await req.json();
 
     try {
-        const newUser = new User({ token, userId });
+        const newUser = new User({ token, userId, username, email, photo });
         await newUser.save();
         return NextResponse.json({ message: "User saved" }, { status: 201 });
     } catch (error) {

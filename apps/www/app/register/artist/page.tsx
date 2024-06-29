@@ -1,18 +1,67 @@
-import GoogleIcon from "@/assets/GoogleIcon";
-import { Button } from "@/components/ui/button";
-import React from "react";
+"use client";
+import { GoogleLogin, CredentialResponse } from "@react-oauth/google";
+import jwt from "jsonwebtoken"; // Import jsonwebtoken
+import { useRouter } from "next/navigation";
+
+interface DecodedToken {
+	sub: string;
+	name: string;
+	email: string;
+	picture: string;
+}
 
 const RegisterArtist = () => {
+	const router = useRouter();
+	const handleSuccess = async (credentialResponse: CredentialResponse) => {
+		const token = credentialResponse.credential;
+
+		// Decode the token using jsonwebtoken
+		const decoded = jwt.decode(token) as DecodedToken;
+
+		if (!decoded) {
+			console.error('Failed to decode token');
+			return;
+		}
+
+		const userId = decoded.sub;
+		const username = decoded.name;
+		const email = decoded.email;
+		const photo = decoded.picture;
+
+		console.log(decoded);
+
+		try {
+			const response = await fetch('/api/user', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ token, userId, username, email, photo, role: "Artist" }),
+			});
+
+			if (response.ok) {
+				console.log('Credential saved');
+				router.push('/');
+			} else {
+				console.error('Failed to save credential');
+			}
+		} catch (error) {
+			console.error('An error occurred', error);
+		}
+	};
+
 	return (
 		<div className="flex flex-col items-center justify-center h-full w-full gap-y-8">
 			<h1 className="text-[2rem] tracking-tighter">
 				Register as an Artist
 			</h1>
-			<div className="flex gap-y-4 flex-col justify-end w-1/3">
-				<Button className="flex gap-x-4">
-					<GoogleIcon />
-					<span>Signin with Google</span>
-				</Button>
+			<div className="flex justify-center items-center">
+				<GoogleLogin
+					onSuccess={handleSuccess}
+					onError={() => {
+						console.log('Login Failed');
+					}}
+				/>
 			</div>
 		</div>
 	);
