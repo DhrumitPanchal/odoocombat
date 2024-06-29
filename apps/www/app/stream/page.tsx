@@ -1,9 +1,10 @@
 "use client";
 
 import { io } from "socket.io-client";
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Mic, MicOff, Video, VideoOff } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 function Stream() {
   const configuration = {
