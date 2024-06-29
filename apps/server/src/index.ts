@@ -1,64 +1,57 @@
 import { createServer, Server } from "http";
-import app from "./app";
-import WebSocket from "ws";
+import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { connectToDB } from "./lib/db";
+import { Server as SocketIOServer, Socket } from "socket.io";
+
 dotenv.config();
 
+const app = express();
 const server: Server = createServer(app);
-const wss: WebSocket.Server = new WebSocket.Server({ server });
+const io = new SocketIOServer(server);
 const DB_URL = process.env.DB_URL as string;
 
 // Connect with db
 connectToDB(DB_URL);
 
-let broadcaster: WebSocket | null = null;
+let broadcaster: Socket | null = null;
 
-wss.on("connection", (ws: WebSocket) => {
-	ws.on("message", (message: string) => {
-		const data = JSON.parse(message);
+io.on("connection", (socket: Socket) => {
+    socket.on("broadcaster", () => {
+        broadcaster = socket;
+    });
 
-		switch (data.type) {
-			case "broadcaster":
-				broadcaster = ws;
-				break;
-			case "watcher":
-				ws.send(JSON.stringify({ type: "watcher" }));
-				break;
-			case "offer":
-				if (broadcaster) {
-					broadcaster.send(
-						JSON.stringify({ type: "offer", offer: data.offer })
-					);
-				}
-				break;
-			case "answer":
-				if (broadcaster) {
-					broadcaster.send(
-						JSON.stringify({ type: "answer", answer: data.answer })
-					);
-				}
-				break;
-			case "candidate":
-				if (broadcaster) {
-					broadcaster.send(
-						JSON.stringify({
-							type: "candidate",
-							candidate: data.candidate,
-						})
-					);
-				}
-				break;
-		}
-	});
+    socket.on("watcher", () => {
+        if (broadcaster) {
+            socket.emit("watcher");
+        }
+    });
 
-	ws.on("close", () => {
-		if (ws === broadcaster) {
-			broadcaster = null;
-		}
-	});
+    socket.on("offer", (offer: any) => {
+        if (broadcaster) {
+            broadcaster.emit("offer", offer);
+        }
+    });
+
+    socket.on("answer", (answer: any) => {
+        if (broadcaster) {
+            broadcaster.emit("answer", answer);
+        }
+    });
+
+    socket.on("candidate", (candidate: any) => {
+        if (broadcaster) {
+            broadcaster.emit("candidate", candidate);
+        }
+    });
+
+    socket.on("disconnect", () => {
+        if (socket === broadcaster) {
+            broadcaster = null;
+        }
+    });
 });
 
-const port: number | any = process.env.PORT || 8080;
-app.listen(port, () => console.log("Server is running on : " + port));
+const port: number | string = process.env.PORT || 3000;
+server.listen(port, () => console.log("Server is running on port: " + port));
