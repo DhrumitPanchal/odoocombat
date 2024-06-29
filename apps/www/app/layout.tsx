@@ -17,16 +17,13 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const token = typeof window !== "undefined" && localStorage.getItem("token");
-
-
     return (
         <html lang="en">
             <body className={cn("dark w-full h-screen", inter.className)}>
                 <GoogleOAuthProvider clientId="252350409319-8k8t2r797e3pb4r005gdak1d6kmajgh7.apps.googleusercontent.com">
-                    {token && <Navbar />}
+                    <Navbar />
                     {children}
-                    {token && <Footer />}
+                    <Footer />
                 </GoogleOAuthProvider>
             </body>
         </html>
